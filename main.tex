@@ -1,23 +1,266 @@
-\documentclass{article}
-\usepackage{graphicx} % Required for inserting images
+% abtex2-modelo-artigo.tex, v-1.9.2 laurocesar
+% Copyright 2012-2014 by abnTeX2 group at http://abntex2.googlecode.com/ 
+%
 
-\title{artigo-computação-natural}
-\author{danilo dos santos da fonte}
-\date{April 2025}
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
+% abnTeX2: Modelo de Artigo Acadêmico em conformidade com
+% ABNT NBR 6022:2003: Informação e documentação - Artigo em publicação 
+% periódica científica impressa - Apresentação
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
 
+\documentclass[
+	% -- opções da classe memoir --
+	article,			% indica que é um artigo acadêmico
+	11pt,				% tamanho da fonte
+	oneside,			% para impressão apenas no verso. Oposto a twoside
+	a4paper,			% tamanho do papel. 
+	% -- opções da classe abntex2 --
+	%chapter=TITLE,		% títulos de capítulos convertidos em letras maiúsculas
+	%section=TITLE,		% títulos de seções convertidos em letras maiúsculas
+	%subsection=TITLE,	% títulos de subseções convertidos em letras maiúsculas
+	%subsubsection=TITLE % títulos de subsubseções convertidos em letras maiúsculas
+	% -- opções do pacote babel --
+	english,			% idioma adicional para hifenização
+	brazil,				% o último idioma é o principal do documento
+	sumario=tradicional
+	]{abntex2}
+
+
+% ---
+% PACOTES
+% ---
+
+% ---
+% Pacotes fundamentais 
+% ---
+\usepackage{lmodern}			% Usa a fonte Latin Modern
+\usepackage[T1]{fontenc}		% Selecao de codigos de fonte.
+\usepackage[utf8]{inputenc}		% Codificacao do documento (conversão automática dos acentos)
+\usepackage{indentfirst}		% Indenta o primeiro parágrafo de cada seção.
+\usepackage{nomencl} 			% Lista de simbolos
+\usepackage{color}				% Controle das cores
+\usepackage{graphicx}			% Inclusão de gráficos
+\usepackage{microtype} 			% para melhorias de justificação
+% ---
+		
+% ---
+% Pacotes adicionais, usados apenas no âmbito do Modelo Canônico do abnteX2
+% ---
+\usepackage{lipsum}				% para geração de dummy text
+% ---
+		
+% ---
+% Pacotes de citações
+% ---
+\usepackage[brazilian,hyperpageref]{backref}	 % Paginas com as citações na bibl
+\usepackage[alf,num]{abntex2cite}	% Citações padrão ABNT
+% ---
+
+\usepackage{amsmath}
+
+% ---
+% Configurações do pacote backref
+% Usado sem a opção hyperpageref de backref
+\renewcommand{\backrefpagesname}{Citado na(s) página(s):~}
+% Texto padrão antes do número das páginas
+\renewcommand{\backref}{}
+% Define os textos da citação
+\renewcommand*{\backrefalt}[4]{
+	\ifcase #1 %
+		Nenhuma citação no texto.%
+	\or
+		Citado na página #2.%
+	\else
+		Citado #1 vezes nas páginas #2.%
+	\fi}%
+% ---
+
+% ---
+% Informações de dados para CAPA e FOLHA DE ROSTO
+% ---
+\titulo{Uma simulação de Burnout}
+\autor{Danilo Fonte}
+\local{Brasil}
+\data{Abril, 2025}
+% ---
+
+% ---
+% Configurações de aparência do PDF final
+
+% alterando o aspecto da cor azul
+\definecolor{blue}{RGB}{41,5,195}
+
+% informações do PDF
+\makeatletter
+\hypersetup{
+     	%pagebackref=true,
+		pdftitle={\@title}, 
+		pdfauthor={\@author},
+    	pdfsubject={Modelo de artigo científico com abnTeX2},
+	    pdfcreator={LaTeX with abnTeX2},
+		pdfkeywords={abnt}{latex}{abntex}{abntex2}{atigo científico}, 
+		colorlinks=true,       		% false: boxed links; true: colored links
+    	linkcolor=blue,          	% color of internal links
+    	citecolor=blue,        		% color of links to bibliography
+    	filecolor=magenta,      		% color of file links
+		urlcolor=blue,
+		bookmarksdepth=4
+}
+\makeatother
+% --- 
+
+% ---
+% compila o indice
+% ---
+\makeindex
+% ---
+
+% ---
+% Altera as margens padrões
+% ---
+\setlrmarginsandblock{3cm}{3cm}{*}
+\setulmarginsandblock{3cm}{3cm}{*}
+\checkandfixthelayout
+% ---
+
+% --- 
+% Espaçamentos entre linhas e parágrafos 
+% --- 
+
+% O tamanho do parágrafo é dado por:
+\setlength{\parindent}{1.3cm}
+
+% Controle do espaçamento entre um parágrafo e outro:
+\setlength{\parskip}{0.2cm}  % tente também \onelineskip
+
+% Espaçamento simples
+\SingleSpacing
+
+% ----
+% Início do documento
+% ----
 \begin{document}
+
+% Retira espaço extra obsoleto entre as frases.
+\frenchspacing 
 
 \maketitle
 
-\section{Introdução}
+\section*{Introdução}
+\addcontentsline{toc}{section}{Introdução}
 
-A síndrome de Burnout é um fenômeno associado à exaustão mental resultante de ambientes corporativos estressantes e exigentes. A Organização Mundial da Saúde (OMS) define o Burnout como um estado de estresse crônico relacionado ao trabalho, caracterizado por exaustão, cinismo e redução da eficácia profissional \cite{Downey2023}. Além disso, o acúmulo de expectativas não atendidas e o gerenciamento inadequado do estresse contribuem significativamente para o desenvolvimento dessa condição \cite{Zhang2020Burnout}.
-Em contextos corporativos modernos, o gerenciamento eficaz dos ciclos de estresse e recompensa dos funcionários é essencial para promover o bem-estar e o equilíbrio no ambiente de trabalho [referência]. A satisfação e a saúde mental dos colaboradores impactam diretamente a produtividade e a retenção de talentos, tornando-se fatores estratégicos para as organizações [referência].
-Para lidar com essa questão, modelos baseados na Teoria dos Jogos Evolutivos oferecem uma abordagem promissora, pois permitem analisar como recompensas e penalidades impactam os trabalhadores ao longo do tempo. Esses modelos possibilitam encontrar um ponto de equilíbrio que maximize o engajamento e a satisfação dos funcionários \cite{Zhang2020Burnout}.
-Neste contexto, este trabalho propõe o uso de Algoritmos Genéticos para otimizar um modelo previamente estabelecido de interação entre empregador e empregado. O objetivo é identificar um equilíbrio sustentável que maximize o bem-estar ao longo do tempo, considerando a dinâmica de recompensas e penalidades dentro da organização [referência ao artigo base da simulação].
+A síndrome de Burnout é um fenômeno associado à exaustão mental resultante de ambientes corporativos estressantes e exigentes. A Organização Mundial da Saúde (OMS) define o Burnout como um estado de estresse crônico relacionado ao trabalho, caracterizado por exaustão, cinismo e redução da eficácia profissional \cite{Downey2023}. Além disso, o acúmulo de expectativas não atendidas e o gerenciamento inadequado do estresse contribuem significativamente para o desenvolvimento dessa condição.
+Em contextos corporativos modernos, o gerenciamento eficaz dos ciclos de estresse e recompensa dos funcionários é essencial para promover o bem-estar e o equilíbrio no ambiente de trabalho. A satisfação e a saúde mental dos colaboradores impactam diretamente a produtividade e a retenção de talentos, tornando-se fatores estratégicos para as organizações  \cite{Slusarz2022}.
+Para lidar com essa questão, modelos baseados na Teoria dos Jogos Evolutivos oferecem uma abordagem promissora, pois permitem analisar como recompensas e penalidades impactam os trabalhadores ao longo do tempo. Esses modelos possibilitam encontrar um ponto de equilíbrio que maximize o engajamento e a satisfação dos funcionários \cite{Sanfey2003}.
+Neste contexto, este trabalho propõe o uso de Algoritmos Genéticos para otimizar o tabuleiro de um modelo previamente estabelecido \cite{Zhang2020Burnout} de interação entre empregador e 
+ múltiplos empregados. O objetivo é identificar um equilíbrio sustentável que maximize o bem-estar ao longo do tempo, considerando a dinâmica de recompensas e penalidades dentro da organização \cite{Zhang2020Burnout}.
 
-\bibliographystyle{plain}
+\bibliographystyle{abntex2-num}
 \bibliography{referencias}
 
+\section{Explificação do Modelo Base}
+O modelo utilizado como base para esta simulação foi proposto por \cite{Zhang2020Burnout} e descreve a interação entre orientador e a universidade. Para este estudo, esses agentes serão reinterpretados como funcionário e empresa, mantendo as mesmas características do modelo original. Assume-se que o funcionário seja um agente totalmente racional, capaz de identificar estratégias que maximizem seus ganhos e minimizem suas perdas, sempre considerando as recompensas ideais com base em expectativas presentes e futuras.
+
+\subsection{Definição do custo de um Funcionário}
+
+O custo de um funcionário pode ser analisado a partir de três componentes principais: custo atual, custo potencial e custo futuro.
+
+\begin{itemize}
+    \item O \textbf{custo atual} inclui fatores como tempo dedicado ao trabalho, carga de trabalho objetiva e o investimento em autoaperfeiçoamento.
+    \item O \textbf{custo potencial} é determinado pelo desgaste mental e pelos custos relacionados à execução do trabalho, sendo influenciado negativamente por fatores externos, como burnout e eventos adversos.
+    \item O \textbf{custo futuro} está associado à incerteza da carreira e às ações necessárias para o planejamento profissional do funcionário.
+\end{itemize}
+
+A equação que representa o custo total do funcionário é dada por:
+
+\begin{equation}
+    G = \beta_1 g_1 + \beta_2 g_2 + \beta_3 g_3
+\end{equation}
+
+\begin{equation}
+    G = \beta_1 (s t + z - l) + \beta_2 (h^2 + c) + \beta_3 h^2
+\end{equation}
+
+Sujeito às seguintes condições:
+
+\begin{equation}
+    \beta_1, \beta_2, \beta_3 > 0, \quad \beta_1 + \beta_2 + \beta_3 = 1
+\end{equation}
+
+\begin{equation}
+    0 < s, t, z, l, h, c < 1, \quad l < z
+\end{equation}
+
+Onde:
+
+\begin{itemize}
+    \item \( G \) representa o custo total do funcionário.
+    \item \( g_1, g_2, g_3 \) correspondem, respectivamente, ao custo atual, custo potencial e custo futuro.
+    \item \( s \) é o custo associado ao tempo dedicado ao trabalho.
+    \item \( t \) representa a carga de trabalho objetiva.
+    \item \( z \) é o custo de autoaperfeiçoamento.
+    \item \( l \) mede a percepção do funcionário sobre a importância do autoaperfeiçoamento.
+    \item \( h^2 \) refere-se ao custo do planejamento de carreira.
+    \item \( c \) representa a possibilidade de eventos inesperados no ambiente de trabalho.
+    \item Os coeficientes \( \beta_1, \beta_2, \beta_3 \) indicam a importância relativa de cada um dos custos, garantindo que sua soma seja igual a 1 (\( \beta_1 + \beta_2 + \beta_3 = 1 \)).
+\end{itemize}
+
+O modelo base também impõe restrições às variáveis, garantindo que:
+
+\[
+0 < s, t, z, l, h, c < 1, \quad l < z
+\]
+
+Isso reflete a premissa de que funcionários mais consistentes em seu desempenho e planejamento de carreira tendem a apresentar um custo total reduzido e maior eficiência no trabalho.
+
+\subsection{Definição do ganho de um funcionário}
+O ganho de um funcionário é modelado a partir de três componentes: ganhos atuais (\( f_1 \)), ganhos potenciais (\( f_2 \)) e ganhos futuros (\( f_3 \)).
+
+\begin{itemize}
+    \item \textbf{Ganhos atuais}: incluem salário (\( d \)) e status profissional externo (\( e \)).
+    \item \textbf{Ganhos potenciais}: referem-se ao planejamento de carreira (\( h_1 \)), autoaperfeiçoamento (\( l \)) e avaliação de performance (\( j \)), ponderada por \( \lambda_1 \).
+    \item \textbf{Ganhos futuros}: abrangem o crescimento do funcionário na empresa, considerando carga de trabalho (\( st \)), planejamento de carreira e reconhecimento profissional.
+\end{itemize}
+
+O ganho total do funcionário (\( F \)) é expresso como:
+
+\begin{equation}
+    F = \alpha_1 f_1 + \alpha_2 f_2 + \alpha_3 f_3 = \alpha_1 (2d + e) + \alpha_2 (h_1 + l + \lambda_1 j) + \alpha_3 (st + h_1 + l + j)
+\end{equation}
+
+Onde:
+
+\begin{equation}
+    \alpha_1, \alpha_2, \alpha_3 > 0, \quad \alpha_1 + \alpha_2 + \alpha_3 = 1, \quad 0 < d, e, t, h_1, l, j, s < 1
+\end{equation}
+
+As perdas e ganhos líquidos (\( M \)) são dados por:
+
+\begin{equation}
+    M = F - G = 2\alpha_1 d + \alpha_2 e + (\alpha_2 + \alpha_3) h_1 - (\beta_2 + \beta_3) h_2 + (\alpha_2 + \alpha_3 + \beta_1) l 
+\end{equation}
+
+\begin{equation}
+    + (\alpha_2 \lambda_1 + \alpha_3) j + (\alpha_3 - \beta_1) st - \beta_1 z - \beta_2 c
+\end{equation}
+
+Onde \( G \) representa os custos do funcionário, considerando planejamento de carreira (\( h_2 \)), autoaperfeiçoamento (\( z \)) e eventos inesperados (\( c \)).
+
+O modelo sugere que um alto nível de autoaperfeiçoamento, planejamento de carreira e reconhecimento profissional resulta em maior ganho e menor custo para o funcionário.
+
+
+\section{Teoria dos Jogos Evolutivos}
+
+\subsection{Equilibrio de Nash}
+
+\section{Simulação}
+
+\subsection{Restrições da Simulação}
+
+\section{Resultados}
+
+\section{Conclusões}
 
 \end{document}
